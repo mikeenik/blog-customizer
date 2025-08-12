@@ -8,8 +8,9 @@
 	transition: transform 0.5s ease;
 }
 
-.container_open {
+.open {
 	transform: translate(0);
+	display: block;
 }
 
 .form {
