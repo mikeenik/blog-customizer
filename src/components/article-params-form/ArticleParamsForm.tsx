@@ -51,47 +51,53 @@ export const ArticleParamsForm = ({ onApply, currentSettings = defaultArticleSta
 			<ArrowButton isOpen={isOpen} onClick={handleToggle} />
 			<aside className={`${styles.container} ${isOpen ? styles.open : ''}`}>
 				<form className={styles.form} onSubmit={handleFormSubmit}>
-					<Select
-						selected={formState.fontFamilyOption}
-						options={fontFamilyOptions}
-						onChange={(option) =>
-							setFormState({ ...formState, fontFamilyOption: option })
-						}
-						title='Шрифт'
-					/>
-					<RadioGroup
-						name='fontSize'
-						options={fontSizeOptions}
-						selected={formState.fontSizeOption}
-						onChange={(option) =>
-							setFormState({ ...formState, fontSizeOption: option })
-						}
-						title='Размер шрифта'
-					/>
-					<Select
-						selected={formState.fontColor}
-						options={fontColors}
-						onChange={(option) =>
-							setFormState({ ...formState, fontColor: option })
-						}
-						title='Цвет шрифта'
-					/>
-					<Select
-						selected={formState.backgroundColor}
-						options={backgroundColors}
-						onChange={(option) =>
-							setFormState({ ...formState, backgroundColor: option })
-						}
-						title='Цвет фона'
-					/>
-					<Select
-						selected={formState.contentWidth}
-						options={contentWidthArr}
-						onChange={(option) =>
-							setFormState({ ...formState, contentWidth: option })
-						}
-						title='Ширина контейнера'
-					/>
+					<h2 className={styles.title}>ЗАДАЙТЕ ПАРАМЕТРЫ</h2>
+					<div className={styles.formGrid}>
+						<Select
+							selected={formState.fontFamilyOption}
+							options={fontFamilyOptions}
+							onChange={(option) =>
+								setFormState({ ...formState, fontFamilyOption: option })
+							}
+							title='Шрифт'
+						/>
+
+						<RadioGroup
+							name='fontSize'
+							options={fontSizeOptions}
+							selected={formState.fontSizeOption}
+							onChange={(option) =>
+								setFormState({ ...formState, fontSizeOption: option })
+							}
+							title='Размер шрифта'
+						/>
+						<Select
+							selected={formState.fontColor}
+							options={fontColors}
+							onChange={(option) =>
+								setFormState({ ...formState, fontColor: option })
+							}
+							title='Цвет шрифта'
+						/>
+						</div>
+						<div className={styles.formGrid}>
+						<Select
+							selected={formState.backgroundColor}
+							options={backgroundColors}
+							onChange={(option) =>
+								setFormState({ ...formState, backgroundColor: option })
+							}
+							title='Цвет фона'
+						/>
+						<Select
+							selected={formState.contentWidth}
+							options={contentWidthArr}
+							onChange={(option) =>
+								setFormState({ ...formState, contentWidth: option })
+							}
+							title='Ширина контейнера'
+						/>
+						</div>
 					<div className={styles.bottomContainer}>
 					<Button title='Сбросить' htmlType='button' type='clear' onClick={handleReset} />
 					<Button title='Применить' htmlType='button' type='apply' onClick={handleApply} />
