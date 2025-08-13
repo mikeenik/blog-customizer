@@ -2,7 +2,10 @@ import { ArrowButton } from 'src/ui/arrow-button';
 import { Button } from 'src/ui/button';
 import { Select } from 'src/ui/select';
 import { RadioGroup } from 'src/ui/radio-group';
-import { useState, useEffect } from 'react';
+import { Text } from 'src/ui/text';
+import { useState, useEffect, useRef } from 'react';
+import clsx from 'clsx';
+import { useOutsideClickClose } from 'src/ui/select/hooks/useOutsideClickClose';
 import {
 	defaultArticleState,
 	fontSizeOptions,
@@ -18,23 +21,33 @@ type ArticleParamsFormProps = {
 	currentSettings?: typeof defaultArticleState;
 };
 
-export const ArticleParamsForm = ({ onApply, currentSettings = defaultArticleState }: ArticleParamsFormProps) => {
-	const [isOpen, setIsOpen] = useState(false);
+export const ArticleParamsForm = ({
+	onApply,
+	currentSettings = defaultArticleState,
+}: ArticleParamsFormProps) => {
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [formState, setFormState] = useState(currentSettings);
+	const asideRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		if (isOpen) {
+		if (isMenuOpen) {
 			setFormState(currentSettings);
 		}
-	}, [currentSettings, isOpen]);
+	}, [currentSettings, isMenuOpen]);
+
+	useOutsideClickClose({
+		isOpen: isMenuOpen,
+		rootRef: asideRef,
+		onChange: setIsMenuOpen,
+	});
 
 	const handleToggle = () => {
-		setIsOpen(!isOpen);
+		setIsMenuOpen(!isMenuOpen);
 	};
 
 	const handleApply = () => {
 		onApply?.(formState);
-		setIsOpen(false);
+		setIsMenuOpen(false);
 	};
 
 	const handleReset = () => {
@@ -44,14 +57,21 @@ export const ArticleParamsForm = ({ onApply, currentSettings = defaultArticleSta
 
 	const handleFormSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
+		handleApply();
 	};
 
 	return (
 		<>
-			<ArrowButton isOpen={isOpen} onClick={handleToggle} />
-			<aside className={`${styles.container} ${isOpen ? styles.open : ''}`}>
+			<ArrowButton isOpen={isMenuOpen} onClick={handleToggle} />
+			<aside
+				ref={asideRef}
+				className={clsx(styles.container, { [styles.open]: isMenuOpen })}>
 				<form className={styles.form} onSubmit={handleFormSubmit}>
-					<h2 className={styles.title}>ЗАДАЙТЕ ПАРАМЕТРЫ</h2>
+					<div className={styles.titleWrapper}>
+						<Text as='h2' size={31} weight={800} uppercase align='left'>
+							ЗАДАЙТЕ ПАРАМЕТРЫ
+						</Text>
+					</div>
 					<div className={styles.formGrid}>
 						<Select
 							selected={formState.fontFamilyOption}
@@ -79,8 +99,8 @@ export const ArticleParamsForm = ({ onApply, currentSettings = defaultArticleSta
 							}
 							title='Цвет шрифта'
 						/>
-						</div>
-						<div className={styles.formGrid}>
+					</div>
+					<div className={styles.formGrid}>
 						<Select
 							selected={formState.backgroundColor}
 							options={backgroundColors}
@@ -97,14 +117,18 @@ export const ArticleParamsForm = ({ onApply, currentSettings = defaultArticleSta
 							}
 							title='Ширина контейнера'
 						/>
-						</div>
+					</div>
 					<div className={styles.bottomContainer}>
-					<Button title='Сбросить' htmlType='button' type='clear' onClick={handleReset} />
-					<Button title='Применить' htmlType='button' type='apply' onClick={handleApply} />
+						<Button
+							title='Сбросить'
+							htmlType='button'
+							type='clear'
+							onClick={handleReset}
+						/>
+						<Button title='Применить' htmlType='submit' type='apply' />
 					</div>
 				</form>
 			</aside>
 		</>
 	);
 };
-//Добавляю этот комменатрий, чтобы сдлеать коммит, потому что джобы тестов после изменения видимости репозитория все равно не проходят

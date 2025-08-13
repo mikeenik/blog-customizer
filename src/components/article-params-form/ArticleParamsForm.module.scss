@@ -21,22 +21,13 @@
 	width: 616px;
 	height: auto;
 	min-height: 100%;
-	padding: 50px 31px;
+	padding: 0 31px 50px 31px;
 	background-color: #ffffff;
 	border-right: 1px solid #000000;
 }
 
-.title {
-	font-family: 'Open Sans', sans-serif;
-	font-weight: 800;
-	font-style: normal;
-	font-size: 31px;
-	line-height: 100%;
-	letter-spacing: 0%;
-	text-align: left;
-	text-transform: uppercase;
+.titleWrapper {
 	margin: 0 0 50px 0;
-	color: #000000;
 }
 
 .formGrid {
@@ -44,8 +35,8 @@
 	grid-template-columns: 1fr;
 	gap: 50px;
 	margin-bottom: 50px;
-	border-bottom: 1px solid #D7D7D7;
-    padding-bottom: 50px;
+	border-bottom: 1px solid #d7d7d7;
+	padding-bottom: 50px;
 }
 
 .formGrid:last-child {

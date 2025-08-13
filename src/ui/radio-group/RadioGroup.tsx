@@ -1,6 +1,7 @@
 import { OptionType } from 'src/constants/articleProps';
 import { Text } from 'src/ui/text';
 import { Option } from './Option';
+import clsx from 'clsx';
 
 import styles from './RadioGroup.module.scss';
 
@@ -18,7 +19,7 @@ export const RadioGroup = (props: RadioGroupProps) => {
 	const handleChange = (option: OptionType) => onChange?.(option);
 
 	return (
-		<div className={styles.container}>
+		<div className={clsx(styles.container, { [styles.hasTitle]: !!title })}>
 			{title && (
 				<>
 					<Text weight={800} size={12} uppercase>
