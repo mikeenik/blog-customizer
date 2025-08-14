@@ -1,5 +1,6 @@
 .container {
 	position: fixed;
+	top: 0;
 	left: 0;
 	width: 616px;
 	height: 100%;
@@ -21,7 +22,7 @@
 	width: 616px;
 	height: auto;
 	min-height: 100%;
-	padding: 0 31px 50px 31px;
+	padding: 50px 31px;
 	background-color: #ffffff;
 	border-right: 1px solid #000000;
 }
