@@ -1,5 +1,6 @@
 .container {
 	position: fixed;
+	top: 0;
 	left: 0;
 	width: 616px;
 	height: 100%;
@@ -8,8 +9,9 @@
 	transition: transform 0.5s ease;
 }
 
-.container_open {
+.open {
 	transform: translate(0);
+	display: block;
 }
 
 .form {
@@ -23,6 +25,23 @@
 	padding: 50px 31px;
 	background-color: #ffffff;
 	border-right: 1px solid #000000;
+}
+
+.titleWrapper {
+	margin: 0 0 50px 0;
+}
+
+.formGrid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 50px;
+	margin-bottom: 50px;
+	border-bottom: 1px solid #d7d7d7;
+	padding-bottom: 50px;
+}
+
+.formGrid:last-child {
+	border-bottom: none;
 }
 
 .bottomContainer {
